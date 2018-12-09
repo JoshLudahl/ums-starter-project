@@ -16,7 +16,7 @@ router.post('/signup', passport.authenticate('signup', { session : false }) , as
 // GET Login Page
 router.get('/login', (req, res, next) => {
 
-
+  res.set('Authorization', 'Bearer ');
   res.render('index');
 });
 
@@ -35,7 +35,8 @@ router.post('/login', async (req, res, next) => {
           //  Sign the JWT token and populate the payload with the user email and id
           const token = jwt.sign({ user : body }, process.env.JWT_KEY);
           //  Send back the token to the user
-
+          res.set('Authorization', 'Bearer ' + token);
+          res.cookie('signed_token', token);
           return res.redirect('/user/profile/?signed_token=' + token);
         });     } catch (error) {
 

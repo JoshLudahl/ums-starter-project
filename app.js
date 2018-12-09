@@ -16,10 +16,23 @@ mongoose.connect(connectionURL, {useNewUrlParser: true, useCreateIndex: true});
 mongoose.connection.on('error', error => console.log(error) );
 mongoose.Promise = global.Promise;
 
+
+//  CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+      return res.status(200).json({});
+  }
+  next();
+});
+
 //  Paths
 app.set('views', path.join(__dirname, '/view/pages'));
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
+app.use('/public/', express.static('public'));
 
 require('./auth/auth');
 
@@ -29,6 +42,8 @@ const routes = require('./routes/routes');
 const secureRoute = require('./routes/secure-route');
 
 app.use('/', routes);
+
+
 //  We plugin our jwt strategy as a middleware so only verified users can access this route
 app.use('/user', passport.authenticate('jwt', { session : false }), secureRoute );
 
