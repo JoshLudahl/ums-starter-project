@@ -38,7 +38,7 @@ passport.use('login', new localStrategy({
     //  Send the user information to the next middleware
     return done(null, user, { message : 'Logged in Successfully'});
   } catch (error) {
-    return done(error);
+    return done(error + " Errors for days");
   }
 }));
 
@@ -57,6 +57,7 @@ passport.use(new JWTstrategy({
     //  Pass the user details to the next middleware
     return done(null, token.user);
   } catch (error) {
+    console.log("asdlkfasdfjasdlfas")
     done(error);
   }
 }));

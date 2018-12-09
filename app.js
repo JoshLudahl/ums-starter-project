@@ -4,9 +4,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
 const path = require('path');
+const cookie_parser = require('cookie-parser');
+
 const UserModel = require('./model/model');
 
-
+app.use(cookie_parser());
 //  Connect to MongoDB
 const connectionURL ='mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PW + '@ds035806.mlab.com:35806/mlab_2014'
 mongoose.connect(connectionURL, {useNewUrlParser: true, useCreateIndex: true});
