@@ -1,0 +1,35 @@
+{
+  "name": "ums-starter-project",
+  "version": "0.0.1",
+  "description": "A basic User Management System starter project using JWT and Passwort authentication.",
+  "main": "app.js",
+
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.15",
+    "nodemon": "^1.18.7",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "api",
+    "jwt",
+    "passport",
+    "user",
+    "javascript",
+    "node",
+    "express",
+    "starter"
+  ],
+  "author": "open",
+  "license": "MIT"
+}
