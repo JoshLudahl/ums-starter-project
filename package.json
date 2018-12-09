@@ -2,11 +2,11 @@
   "name": "ums-starter-project",
   "version": "0.0.1",
   "description": "A basic User Management System starter project using JWT and Passwort authentication.",
-  "main": "app.js",
-
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.15",
@@ -18,7 +18,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "api",
