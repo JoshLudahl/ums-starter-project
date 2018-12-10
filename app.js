@@ -6,7 +6,7 @@ const app = express();
 const path = require('path');
 const cookie_parser = require('cookie-parser');
 
-const UserModel = require('./model/model');
+
 
 app.use(cookie_parser());
 //  Connect to MongoDB
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//  Paths
+//  Paths and views
 app.set('views', path.join(__dirname, '/view/pages'));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));

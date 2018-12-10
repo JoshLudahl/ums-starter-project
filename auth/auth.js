@@ -7,6 +7,7 @@ passport.use('signup', new localStrategy({
   usernameField : 'email',
   passwordField : 'password'
 }, async (email, password, done) => {
+
     try {
       //  Save the information provided by the user to the the database
       const user = await UserModel.create({ email, password });
@@ -38,7 +39,7 @@ passport.use('login', new localStrategy({
     //  Send the user information to the next middleware
     return done(null, user, { message : 'Logged in Successfully'});
   } catch (error) {
-    return done(error + " Errors for days");
+    return done(error);
   }
 }));
 
@@ -52,14 +53,14 @@ passport.use(new JWTstrategy({
   //  secret we used to sign our JWT
   secretOrKey : process.env.JWT_KEY,
   //  we expect the user to send the token as a query paramater with the name 'signed_token'
-  jwtFromRequest : ExtractJWT.fromUrlQueryParameter('signed_token')
+  jwtFromRequest : ExtractJWT.fromUrlQueryParameter('signed_token') || ExtractJWT.fromAuthHeaderAsBearerToken()
 
 }, async (token, done) => {
   try {
+
     //  Pass the user details to the next middleware
     return done(null, token.user);
   } catch (error) {
-    console.log("asdlkfasdfjasdlfas")
     done(error);
   }
 }));

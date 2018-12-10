@@ -51,50 +51,7 @@
 
 
     <div id="datas"></div>
-<script>
-const fire = () => {
 
-var invocation = new XMLHttpRequest();
-const url = '/login';
-invocation.open("POST", url, true, 'email@email.com', "password");
-invocation.withCredentials = true;
-
-}
-
-
-
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("datas").innerHTML = getCookie('signed_token');
-        localStorage.setItem('storeage', getCookie('signed_token'));
-    }
-  };
-
-  xhttp.open("GET", '/login', true);
-  xhttp.send();
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-
-</script>
-    <button onclick="loadDoc('signed_token')">fire</button>
 </body>
 
 </html>

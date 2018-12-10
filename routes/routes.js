@@ -25,17 +25,19 @@ router.post('/login', async (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {     try {
         if(err || !user){
           const error = new Error('An Error occured')
-          return next(error);
+          res.status(500).json({message: 'error logging in'});
+          return next();
         }
         req.login(user, { session : false }, async (error) => {
-          if( error ) return next(error)
+          if( error ) return next(new errors.UnauthorizedError(error));
           //  We don't want to store the sensitive information such as the
           //  user password in the token so we pick only the email and id
           const body = { _id : user._id, email : user.email };
-          //  Sign the JWT token and populate the payload with the user email and id
-          const token = jwt.sign({ user : body }, process.env.JWT_KEY);
+          //  Sign the JWT token and populate the payload with the user email, id, and expiresIn variables
+          const token = jwt.sign({ user : body }, process.env.JWT_KEY,{
+            expiresIn: '1h'
+          });
           //  Send back the token to the user
-          res.set('Authorization', 'Bearer ' + token);
           res.cookie('signed_token', token);
           return res.redirect('/user/profile/?signed_token=' + token);
         });     } catch (error) {
