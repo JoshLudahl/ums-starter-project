@@ -23,14 +23,16 @@ router.get('/profile', (req, res, next) => {
 
 router.get('/usersList', (req, res, next) => {
   UserModel.find()
-  .exec()
-  .then(result =>{
-    res.status(200).json({result});
-    next();
-  })
-  .catch(error =>{
-    return error;
-  });
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        result
+      });
+      next();
+    })
+    .catch(error => {
+      return error;
+    });
 });
 
 module.exports = router;
