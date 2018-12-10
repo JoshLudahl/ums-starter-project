@@ -5,8 +5,9 @@ const passport = require('passport');
 const app = express();
 const path = require('path');
 const cookie_parser = require('cookie-parser');
+const morgan = require('morgan');
 
-
+app.use(morgan('dev'));
 
 app.use(cookie_parser());
 //  Connect to MongoDB
@@ -39,7 +40,7 @@ require('./auth/auth');
 app.use( bodyParser.urlencoded({ extended : false }) );
 
 const routes = require('./routes/routes');
-const secureRoute = require('./routes/secure-route');
+const secureRoute = require('./routes/user');
 
 app.use('/', routes);
 
