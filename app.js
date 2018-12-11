@@ -9,6 +9,7 @@ const morgan = require('morgan');
 
 app.use(morgan('dev'));
 
+
 app.use(cookie_parser());
 //  Connect to MongoDB
 const connectionURL = 'mongodb://' + process.env.MONGO_USER + ':' + process.env.MONGO_PW + '@ds035806.mlab.com:35806/mlab_2014'
